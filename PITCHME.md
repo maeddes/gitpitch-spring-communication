@@ -14,7 +14,7 @@
 
 Service with REST Endpoint exposed
 
-´´´java
+```java
 
 @SpringBootApplication
 @RestController
@@ -28,13 +28,13 @@ public class SpringApplication {
 
     }
 
-´´´
+```
 
 +++
 
 Other service calling REST Endpoint
 
-´´´java
+```java
 String callService(){
 
     RestTemplate template = new RestTemplate();
@@ -45,11 +45,11 @@ String callService(){
     return response.getBody();
 
 }
-´´´
+```
 
 +++
 
-´´´java
+```java
 @SpringBootApplication
 @RestController
 public class SpringAmqpApplication {
@@ -59,7 +59,7 @@ public class SpringAmqpApplication {
 
     @Autowired
     AMQPReceiver receiver;
-´´´
+```
 
 
 ---
@@ -73,7 +73,7 @@ public class SpringAmqpApplication {
 
 +++
 
-´´´java
+```java
 @Configuration
 public class AMQPConfig {
 
@@ -93,11 +93,11 @@ public class AMQPConfig {
     }
 
 }
-´´´
+```
 
 +++
 
-´´´java
+```java
 @Configuration
 public class AMQPConfig {
 
@@ -117,11 +117,11 @@ public class AMQPConfig {
     }
 
 }
-´´´
+```
 
 +++
 
-´´´java
+```java
 public class AMQPSender {
 
     @Autowired
@@ -135,12 +135,12 @@ public class AMQPSender {
         System.out.println(" [x] Sent '" + message + "'");
     }
 }
-´´´
+```
 
 +++
 
 
-´´´java
+```java
 @RabbitListener(queues = "my-queue")
 public class AMQPReceiver {
 
@@ -151,7 +151,7 @@ public class AMQPReceiver {
     }
 
 }
-´´´
+```
 
 ---
 
@@ -162,7 +162,7 @@ public class AMQPReceiver {
 
 +++
 
-´´´java
+```java
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         return new JedisConnectionFactory();
@@ -180,11 +180,11 @@ public class AMQPReceiver {
     MessageListenerAdapter messageListener() {
         return new MessageListenerAdapter(new RedisMessageSubscriber());
     }
-´´´
+```
 
 +++
 
-´´´java
+```java
     @Bean
     RedisMessageListenerContainer redisContainer() {
         final RedisMessageListenerContainer container = new RedisMessageListenerContainer();
@@ -202,11 +202,11 @@ public class AMQPReceiver {
     ChannelTopic topic() {
         return new ChannelTopic("pubsub:queue");
     }
-´´´
+```
 
 +++
 
-´´´java
+```java
 @Service
 public class RedisMessagePublisher implements MessagePublisher {
 
@@ -229,11 +229,11 @@ public class RedisMessagePublisher implements MessagePublisher {
         redisTemplate.convertAndSend(topic.getTopic(), message);
     }
 }
-´´´
+```
 
 +++
 
-´´´java
+```java
 @Service
 public class RedisMessageSubscriber implements MessageListener {
 
@@ -251,11 +251,11 @@ public class RedisMessageSubscriber implements MessageListener {
     }
 }
 
-´´´
+```
 
 +++
 
-´´´java
+```java
 @SpringBootApplication
 @RestController
 public class SpringRedisPubsubApplication {
@@ -266,7 +266,7 @@ public class SpringRedisPubsubApplication {
 	@Autowired
 	private RedisMessageSubscriber redisMessageSubscriber;
 
-´´´
+```
 
 
 
