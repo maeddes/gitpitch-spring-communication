@@ -15,7 +15,6 @@
 Service with REST Endpoint exposed
 
 ```java
-
 @SpringBootApplication
 @RestController
 public class SpringApplication {
@@ -46,21 +45,6 @@ String callService(){
 
 }
 ```
-
-+++
-
-```java
-@SpringBootApplication
-@RestController
-public class SpringAmqpApplication {
-
-    @Autowired
-    AMQPSender sender;
-
-    @Autowired
-    AMQPReceiver receiver;
-```
-
 
 ---
 
@@ -153,6 +137,19 @@ public class AMQPReceiver {
 }
 ```
 
++++
+
+```java
+@SpringBootApplication
+@RestController
+public class SpringAmqpApplication {
+
+    @Autowired
+    AMQPSender sender;
+
+    @Autowired
+    AMQPReceiver receiver;
+```
 ---
 
 
