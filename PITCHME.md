@@ -82,30 +82,6 @@ public class AMQPConfig {
 +++
 
 ```java
-@Configuration
-public class AMQPConfig {
-
-    @Bean
-    public Queue hello() {
-        return new Queue("my-queue");
-    }
-
-    @Bean
-    public AMQPReceiver receiver() {
-        return new AMQPReceiver();
-    }
-
-    @Bean
-    public AMQPSender sender() {
-        return new AMQPSender();
-    }
-
-}
-```
-
-+++
-
-```java
 public class AMQPSender {
 
     @Autowired
@@ -265,5 +241,67 @@ public class SpringRedisPubsubApplication {
 
 ```
 
+---
+
+# Containers
+
++++
+
+```bash
+$ docker run -d -p 5672:5672 -p 15672:15672 tutum/rabbitmq
+Unable to find image 'tutum/rabbitmq:latest' locally
+latest: Pulling from tutum/rabbitmq
+faecf96fd5ab: Pulling fs layer
+995977506e98: Pulling fs layer
+efb63fb8dcb6: Pulling fs layer
+a3ed95caeb02: Pulling fs layer
+bc0233a814ac: Pulling fs layer
+bfa9468b9a43: Pulling fs layer
+```
+
++++
+
+```bash
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                              NAMES
+964df5273f31        tutum/rabbitmq      "/run.sh"                6 minutes ago       Up 6 minutes        0.0.0.0:5672->5672/tcp, 0.0.0.0:15672->15672/tcp   keen_visvesvaraya
+```
+
++++
+
+```bash
+$ docker logs 964df5273f31
+=> Securing RabbitMQ with a random password
+=> Done!
+========================================================================
+You can now connect to this RabbitMQ server using, for example:
+
+    curl --user admin:6pjXZIEU5eam http://<host>:<port>/api/vhosts
+
+Please remember to change the above password as soon as possible!
+========================================================================
+
+              RabbitMQ 3.6.1. Copyright (C) 2007-2016 Pivotal Software, Inc.
+  ##  ##      Licensed under the MPL.  See http://www.rabbitmq.com/
+  ##  ##
+  ##########  Logs: /var/log/rabbitmq/rabbit@964df5273f31.log
+  ######  ##        /var/log/rabbitmq/rabbit@964df5273f31-sasl.log
+  ##########
+              Starting broker... completed with 6 plugins.
+```
+
++++
+
+```properties
+spring.jpa.hibernate.ddl-auto=create
+spring.datasource.url=jdbc:mysql://192.168.99.100:3306/mydb
+spring.datasource.username=matthias
+spring.datasource.password=matthias
+
+spring.rabbitmq.host = 192.168.99.100
+spring.rabbitmq.port = 5672
+spring.rabbitmq.username = admin
+spring.rabbitmq.password = 6pjXZIEU5eam
+```
 
 
