@@ -99,19 +99,15 @@ public class AMQPSender {
 
 +++
 
-
 ```java
 @RabbitListener(queues = "my-queue")
 public class AMQPReceiver {
-
+    
     @RabbitHandler
     public void receive(String in) {
-    
             System.out.println("Received '" + in + "'");
-	    
-            messageList.add(in);
+	    messageList.add(in);
     }
-
 }
 ```
 
