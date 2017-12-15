@@ -106,7 +106,7 @@ public class AMQPReceiver {
     @RabbitHandler
     public void receive(String in) {
             System.out.println("Received '" + in + "'");
-	    messageList.add(in);
+	    hmessageList.add(in);
     }
 }
 ```
